@@ -18,12 +18,12 @@ public:
 	void			parse(std::string & strToParce);
 
 	std::string &	getTime();
-	std::string &	getdate();
+	std::string &	getDate();
 
 private:
 
-	std::string		time;
-	std::string		date;
+	std::string		_time;
+	std::string		_date;
 
 };
 

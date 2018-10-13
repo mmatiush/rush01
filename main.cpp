@@ -2,7 +2,7 @@
 #include "MLXDisplay.hpp"
 #include "OSInfo.hpp"
 #include "TimeModule.hpp"
-#include "IMonitorModule.hpp"
+#include "HostUserNames.hpp"
 
 std::string exec(const char* cmd) {
 
@@ -23,11 +23,18 @@ std::string exec(const char* cmd) {
 int		main(int ac, char **av) {
 
 	if (ac == 1) {
-		std::cout << "ncurses" << std::endl;
 		TimeModule t;
+		HostUserNames n;
 
 		std::string s = exec("top");
 		t.parse(s);
+		std::cout << t.getTime() << std::endl;
+		std::cout << t.getDate() << std::endl;
+		
+		n.parse(s);
+		std::cout << n.getHostName() << std::endl;
+		std::cout << n.getUserName() << std::endl;
+
 		// ncurses.run();
 	}
 	else if (ac == 2 && (strcmp(av[1], "g") == 0))
@@ -38,5 +45,6 @@ int		main(int ac, char **av) {
 	else
 		std::cout << "Usage: ./ft_gkrellm [ g ]" << std::endl;
 
+	// system("leaks --quiet ft_gkrellm");
 	return (0);
 }
