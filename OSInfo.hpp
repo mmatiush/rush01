@@ -7,8 +7,6 @@
 class OSInfo : public IMonitorModule
 {
 
-private:
-
 public:
 
 	OSInfo();
