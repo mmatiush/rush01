@@ -36,7 +36,8 @@ HostUserNames &		HostUserNames::operator=( HostUserNames const & rhs ) {
 
 	if (this == &rhs)
 		return (*this);
-	/*data*/
+	strcpy(this->_hostName, rhs._hostName);
+	strcpy(this->_userName, rhs._userName);
 
 	return (*this);
 
