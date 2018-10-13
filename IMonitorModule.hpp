@@ -1,8 +1,10 @@
 #ifndef IMONITOR_MODULE_HPP
 # define IMONITOR_MODULE_HPP
 
-# include <ncurses.h>
-# include <map>
+# include <sys/types.h>
+# include <sys/sysctl.h>
+
+#define BUFFERLEN 128
 
 class IMonitorModule
 {
@@ -10,7 +12,7 @@ class IMonitorModule
 public:
 
 	virtual ~IMonitorModule() {}
-	virtual void parse(std::string & strToParce, std::map<std::string, std::string> & map) = 0;
+	virtual void parse(std::string & strToParce) = 0;
 
 };
 
