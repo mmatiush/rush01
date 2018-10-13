@@ -3,6 +3,7 @@
 #include "OSInfo.hpp"
 
 int		main(int ac, char **av) {
+
 	if (ac == 1)
 		std::cout << "ncurses" << std::endl;
 		// ncurses.run();
