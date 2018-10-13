@@ -1,15 +1,15 @@
 #include "RAM.hpp"
 
-Ram::Ram() {}
+RAM::RAM() {}
 
-Ram::~Ram() {}
+RAM::~RAM() {}
 
-Ram::Ram(Ram const & other)
+RAM::RAM(RAM const & other)
 {
 	*this = other;
 }
 
-Ram & Ram::operator=(Ram const & other)
+RAM & RAM::operator=(RAM const & other)
 {
 	if (this != &other)
 	{
@@ -21,7 +21,7 @@ Ram & Ram::operator=(Ram const & other)
 		return (*this);
 }
 
-void Ram::parse(std::string & strToParce)
+void RAM::parse(std::string & strToParce)
 {
 	size_t	pos = 0;
 	std::string result;
@@ -33,21 +33,21 @@ void Ram::parse(std::string & strToParce)
 	this->_physMem = result.substr(10, pos);
 
 	pos = result.find(" wired", 0);
-	this->_wired = result.substr((result.find("(", 0) + 1), pos);
+	this->_wired = result.substr((result.find("(", 0) + 1), pos - 1);
 
 	pos = result.find(" unused", 0);
-	this->_unused = result.substr((result.find(",", 0) + 1), pos);
+	this->_unused = result.substr((result.find(",", 0) + 1), pos - 1);
 
 }
 
-std::string Ram::getPhysMem() const {
+std::string RAM::getPhysMem() const {
 	return this->_physMem;
 }
 
-std::string Ram::getWired() const {
+std::string RAM::getWired() const {
 	return this->_wired;
 }
 
-std::string Ram::getUnused() const {
+std::string RAM::getUnused() const {
 	return this->_unused;
 }

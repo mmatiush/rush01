@@ -5,7 +5,7 @@
 # include "IMonitorModule.hpp"
 # include <sstream>
 
-class Ram : public IMonitorModule
+class RAM : public IMonitorModule
 {
 
 private:
@@ -20,10 +20,10 @@ public:
 	std::string getWired() const;
 	std::string getUnused() const;
 
-	Ram();
-	~Ram();
-	Ram(Ram const & other);
-	Ram & operator=(Ram const & other);
+	RAM();
+	~RAM();
+	RAM(RAM const & other);
+	RAM & operator=(RAM const & other);
 
 	void parse(std::string & strToParce);
 
