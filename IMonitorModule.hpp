@@ -3,6 +3,7 @@
 
 # include <sys/types.h>
 # include <sys/sysctl.h>
+# include <string>
 
 #define BUFFERLEN 512
 

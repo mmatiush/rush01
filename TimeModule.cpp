@@ -39,7 +39,19 @@ TimeModule &		TimeModule::operator=( TimeModule const & rhs ) {
 
 // Methods
 
-void				parse( std::string & strToParce ) {
-	std::cout << strToParce << std::endl;
+void				TimeModule::parse( std::string & strToParce ) {
+
+	size_t start;
+	size_t end;
+
+	start = strToParce.find("\n", 0);
+	end = strToParce.find("\n", start + 1);
+	std::string res = strToParce.substr(start, end);
+
+	std::cout << " RES: " << res << std::endl;
+
+	// std::getline(strToParce, str);
+	// std::getline(strToParce, str);
+
 }
 

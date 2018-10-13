@@ -2,8 +2,10 @@
 # define TIMEMODULE_HPP
 # include "IMonitorModule.hpp"
 # include <iostream>
+# include <string>
+# include <sstream>
 
-class TimeModule : IMonitorModule {
+class TimeModule : public IMonitorModule {
 
 public:
 
