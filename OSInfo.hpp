@@ -12,12 +12,14 @@ private:
 	std::string _productName;
 	std::string _buildVersion;
 	std::string _productVersion;
+	std::string _kernelVersion;
 
 public:
 
 	std::string getProductName() const;
 	std::string getBuildVersion() const;
 	std::string getProductVersion() const;
+	std::string getKernelVersion() const;
 
 	OSInfo();
 	~OSInfo();

@@ -4,7 +4,7 @@
 # include <sys/types.h>
 # include <sys/sysctl.h>
 
-#define BUFFERLEN 128
+#define BUFFERLEN 512
 
 class IMonitorModule
 {

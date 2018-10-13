@@ -18,6 +18,6 @@ std::string exec(const char* cmd) {
 
 int main()
 {
-	std::cout << exec("top") << std::endl;
+	std::string str = exec("top");
 	return (0);
 }
