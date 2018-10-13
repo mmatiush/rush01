@@ -2,7 +2,7 @@ NAME = ft_gkrellm
 
 FLAGS = -Wall -Wextra -Werror
 
-SRC = new_main.cpp
+SRC = main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
