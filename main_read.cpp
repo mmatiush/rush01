@@ -1,4 +1,5 @@
 #include <iostream>
+#include "TimeModule.hpp"
 
 std::string exec(const char* cmd) {
 
@@ -7,10 +8,10 @@ std::string exec(const char* cmd) {
 	FILE* pipe = popen(cmd, "r");
 	if (!pipe)
 		throw std::runtime_error("popen() failed!");
-	
-	for (int i = 0; i < 10;i++)
-	if (fgets(buffer, 1000, pipe) != NULL)
-		result += buffer;
+
+	for (int i = 0; i < 10; i++)
+		if (fgets(buffer, 1000, pipe) != NULL)
+			result += buffer;
 	pclose(pipe);
 
 	return result;

@@ -10,7 +10,7 @@ class IMonitorModule
 public:
 
 	virtual ~IMonitorModule() {}
-	virtual void parse(std::string & strToParce, std::map<std::string, std::string> & map) = 0;
+	virtual void parse(std::string & strToParce) = 0;
 
 };
 
