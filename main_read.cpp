@@ -2,14 +2,14 @@
 
 std::string exec(const char* cmd) {
 
-	char buffer[200];
+	char buffer[1000];
 	std::string result = "";
 	FILE* pipe = popen(cmd, "r");
 	if (!pipe)
 		throw std::runtime_error("popen() failed!");
 	
 	for (int i = 0; i < 10;i++)
-	if (fgets(buffer, 200, pipe) != NULL)
+	if (fgets(buffer, 1000, pipe) != NULL)
 		result += buffer;
 	pclose(pipe);
 

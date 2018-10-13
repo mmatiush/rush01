@@ -1,0 +1,5 @@
+/*			CPU			*/
+sysctl -n vm.loadavg
+sysctlbyname("machdep.cpu.brand_string",&buffer,&bufferlen,NULL,0);
+
+sysctlbyname("hw.memsize",&i,&a,NULL,0);

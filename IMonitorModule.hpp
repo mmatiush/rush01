@@ -2,6 +2,7 @@
 # define IMONITOR_MODULE_HPP
 
 # include <ncurses.h>
+# include <map>
 
 class IMonitorModule
 {
@@ -9,6 +10,7 @@ class IMonitorModule
 public:
 
 	virtual ~IMonitorModule() {}
+	virtual void parce(std::string & strToParce, std::map<std::string, std::string> & map);
 
 };
 
