@@ -10,7 +10,7 @@ public:
 
 	HostUserNames( void );
 	HostUserNames( HostUserNames const & src );
-	~HostUserNames( void );
+	virtual ~HostUserNames( void );
 
 	HostUserNames &	operator=( HostUserNames const & rhs );
 

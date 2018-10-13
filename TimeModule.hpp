@@ -11,7 +11,7 @@ public:
 
 	TimeModule( void );
 	TimeModule( TimeModule const & src );
-	~TimeModule( void );
+	virtual ~TimeModule( void );
 
 	TimeModule &	operator=( TimeModule const & rhs );
 
