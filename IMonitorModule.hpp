@@ -1,8 +1,10 @@
 #ifndef IMONITOR_MODULE_HPP
 # define IMONITOR_MODULE_HPP
 
-# include <ncurses.h>
-# include <map>
+# include <sys/types.h>
+# include <sys/sysctl.h>
+
+#define BUFFERLEN 512
 
 class IMonitorModule
 {
