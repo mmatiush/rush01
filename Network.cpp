@@ -27,11 +27,11 @@ Network & Network::operator=(Network const & other)
 }
 
 std::string Network::getPacketsIn() const{
-	this->_packetsIn;
+	return this->_packetsIn;
 }
 
 std::string Network::getPacketsOut() const{
-	this->_packetsOut;
+	return this->_packetsOut;
 }
 
 void Network::parse(std::string & strToParce) {

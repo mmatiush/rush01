@@ -26,6 +26,11 @@ public:
 	OSInfo(OSInfo const & other);
 	OSInfo & operator=(OSInfo const & other);
 
+	void parse(std::string & strToParce)
+	{ if (strToParce.length())
+		return;
+	}
+	
 };
 
 #endif

@@ -59,25 +59,25 @@ void CPU::parse(std::string & strToParce)
 
 
 std::string CPU::getAvg1() const{
-	this->_avg1;
+	return this->_avg1;
 }
 
 std::string CPU::getAvg5() const{
-	this->_avg5;
+	return this->_avg5;
 }
 
 std::string CPU::getAvg15() const{
-	this->_avg15;
+	return this->_avg15;
 }
 
 std::string CPU::getUsageUser() const{
-	this->_usageUser;
+	return this->_usageUser;
 }
 
 std::string CPU::getUsageSys() const{
-	this->_usageSys;
+	return this->_usageSys;
 }
 
 std::string CPU::getUsageIdle() const{
-	this->_usageIdle;
+	return this->_usageIdle;
 }

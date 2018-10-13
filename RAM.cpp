@@ -1,5 +1,5 @@
 #include "RAM.hpp"
-
+#include <iostream>
 RAM::RAM() {}
 
 RAM::~RAM() {}
@@ -27,13 +27,13 @@ void RAM::parse(std::string & strToParce)
 	std::string result;
 
 	pos = strToParce.find("PhysMem: ", 0);
-	result = strToParce.substr(pos, (strToParce.find("\n", pos)) - pos);
+	result = strToParce.substr(pos + 9, (strToParce.find("\n", pos + 1)) - pos - 9);
 
 	pos = result.find(" used", 0);
-	this->_physMem = result.substr(10, pos);
+	this->_physMem = result.substr(0, pos);
 
 	pos = result.find(" wired", 0);
-	this->_wired = result.substr((result.find("(", 0) + 1), pos - 1);
+	this->_wired = result.substr((result.find("(", 0) + 1), pos - 2);
 
 	pos = result.find(" unused", 0);
 	this->_unused = result.substr((result.find(",", 0) + 1), pos - 1);
