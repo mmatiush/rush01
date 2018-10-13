@@ -19,5 +19,6 @@ std::string exec(const char* cmd) {
 int main()
 {
 	std::string str = exec("top");
+	std::cout << str << std::endl;
 	return (0);
 }
