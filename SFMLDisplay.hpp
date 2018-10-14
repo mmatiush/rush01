@@ -39,11 +39,11 @@ public:
 	void	displayNetwork( void );
 
 	void	displayTime( std::string &str );
-	// void	displayOSinfo( std::string &str );
-	// void	displayHostUserName( std::string &str );
-	// void	displayCPU( std::string &str );
-	// void	displayRAM( std::string &str );
-	// void	displayNetwork( std::string &str );
+	void	displayOSinfo( std::string &str );
+	void	displayHostUserName( std::string &str );
+	void	displayCPU( std::string &str );
+	void	displayRAM( std::string &str );
+	void	displayNetwork( std::string &str );
 
 	void		display();
 	std::string	ft_exec(const char *cmd);
