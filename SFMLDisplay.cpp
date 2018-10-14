@@ -37,8 +37,12 @@ SFMLDisplay::SFMLDisplay() : _rect(std::vector<sf::RectangleShape *>(10))
 	sprite2->setPosition(0,1500);
 
 	std::vector<sf::RectangleShape *>::iterator it = _rect.begin();
-	for(; it != _rect.end(); it++)
-		*it = new sf::RectangleShape(sf::Vector2f(10, 0));
+	for(int x = 0; it != _rect.end(); it++, (x += 11))
+	{
+		*it = new sf::RectangleShape(sf::Vector2f(10, 1));
+		(*it).setFillColor(sf::Color::Green);
+		(*it).setPosition(400 + x, 1500);
+	}
 }
 
 SFMLDisplay::~SFMLDisplay()
@@ -82,6 +86,17 @@ void	SFMLDisplay::displayOSinfo( void ) {}
 
 void	SFMLDisplay::displayTime( void ) {}
 
+
+void	SFMLDisplay::displayHist( void )
+{
+	std::vector<sf::RectangleShape *>::iterator it = --(_rect.end());
+	for(; it != _rect.begin(); it--)
+	{
+		*it.setScale((*(it - 1)).getScale());
+		window->draw()
+	}
+	*it.setScale(sf::Vector2f(10, (std::stod(_cPU.getUsageSys()) * 2)));
+}
 
 // TIME
 void	SFMLDisplay::displayTime( std::string &str ) {
@@ -422,16 +437,6 @@ void	SFMLDisplay::displayLines(void)
 	window->draw(lines);
 }
 
-void	SFMLDisplay::displayHist( void )
-{
-	std::vector<sf::RectangleShape *>::iterator it = _rect.begin();
-	for(; it != _rect.end(); it++)
-	{
-		if (++it != _rect.end())
-			;
-	}
-}
-
 
 void	SFMLDisplay::display( void ) {
 	std::string StrToParse;
@@ -457,6 +462,7 @@ void	SFMLDisplay::display( void ) {
 		displayCPU( StrToParse );
 		displayRAM( StrToParse );
 		displayNetwork( StrToParse );
+		displayHist();
 
 		window->display();
 		sf::sleep(t1);
