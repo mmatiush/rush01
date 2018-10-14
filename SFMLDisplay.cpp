@@ -40,8 +40,8 @@ SFMLDisplay::SFMLDisplay() : _rect(std::vector<sf::RectangleShape *>(10))
 	for(int x = 0; it != _rect.end(); it++, (x += 11))
 	{
 		*it = new sf::RectangleShape(sf::Vector2f(10, 1));
-		(*it).setFillColor(sf::Color::Green);
-		(*it).setPosition(400 + x, 1500);
+		(*it)->setFillColor(sf::Color::Green);
+		(*it)->setPosition(400 + x, 1500);
 	}
 }
 
@@ -92,10 +92,11 @@ void	SFMLDisplay::displayHist( void )
 	std::vector<sf::RectangleShape *>::iterator it = --(_rect.end());
 	for(; it != _rect.begin(); it--)
 	{
-		*it.setScale((*(it - 1)).getScale());
-		window->draw()
+		*it->setScale((*(it - 1))->getScale());
+		window->draw(*it);
 	}
 	*it.setScale(sf::Vector2f(10, (std::stod(_cPU.getUsageSys()) * 2)));
+	window->draw(*it);
 }
 
 // TIME
