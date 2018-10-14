@@ -39,6 +39,7 @@ TerminalDisplay &		TerminalDisplay::operator=( TerminalDisplay const & rhs ) {
 	this->mNetwork = rhs.mNetwork;
 	this->mCPU = rhs.mCPU;
 	this->mRAM = rhs.mRAM;
+	this->graph = rhs.graph;
 
 	return (*this);
 
