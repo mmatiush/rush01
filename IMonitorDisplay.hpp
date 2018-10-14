@@ -1,6 +1,8 @@
 #ifndef IMONITORDISPLAY_HPP
 # define IMONITORDISPLAY_HPP
 
+#include "main.hpp"
+
 class IMonitorDisplay
 {
 
@@ -14,6 +16,7 @@ public:
 	virtual void	displayRAM( void ) = 0;
 	virtual void	displayOSinfo( void ) = 0;
 	virtual void	displayTime( void ) = 0;
+
 
 };
 

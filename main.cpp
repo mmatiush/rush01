@@ -1,12 +1,4 @@
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include "MLXDisplay.hpp"
-#include "OSInfo.hpp"
-#include "TimeModule.hpp"
-#include "HostUserNames.hpp"
-#include "RAM.hpp"
-#include "CPU.hpp"
-#include "Network.hpp"
+# include "main.hpp"
 
 std::string exec(const char* cmd) {
 
@@ -77,8 +69,9 @@ int		main(int ac, char **av) {
 	}
 	else if (ac == 2 && (strcmp(av[1], "g") == 0))
 	{
-		std::cout << "MLX" << std::endl;
-		// mlx.run();
+		SFMLDisplay sfml;
+
+		sfml.display();
 	}
 	else
 		std::cout << "Usage: ./ft_gkrellm [ g ]" << std::endl;
