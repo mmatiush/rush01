@@ -82,13 +82,19 @@ void 		TerminalDisplay::run( void ) {
 	while (-42) {
 	
 		erase();
-	
+		updateMonitors();
+
 		displayFrame();
 		displayHeader();
 		displayTime();
+		displayHostUserName();
+		displayOSinfo();
+		displayNetwork();
+		displayCPU();
+		displayRAM();
 
 		refresh();
-		usleep (100000);
+		usleep (10000);
 
 	}
 
@@ -120,45 +126,129 @@ void		TerminalDisplay::displayFrame( void ) {
 
 void	TerminalDisplay::displayHeader( void ) {
 	
-	std::string str = "System Monitor";
+	attron(A_REVERSE);
 
+	std::string str = "System Monitor";
 	mvprintw(MIN_Y, (MAX_X - str.size()) / 2, "%s", str.c_str());
+	
+	attroff(A_REVERSE);
 
 }
 
 void	TerminalDisplay::displayTime( void ) {
-	
+
 	std::string t = mTime.getTime();
 	std::string d = mTime.getDate();
 
-	mvprintw(MIN_Y + 2, MIN_X + 2, d.c_str());
-	mvprintw(MIN_Y + 2, MAX_X + 2 - d.size(), d.c_str());
+	mvprintw(MIN_Y + 1, MIN_X + 2, d.c_str());
+	mvprintw(MIN_Y + 1, MAX_X - 1 - t.size(), t.c_str());
 
 }
 
 void	TerminalDisplay::displayHostUserName( void ) {
 
-	return ;
+	mvprintw(3, COL1, "Userame:");
+	mvprintw(4, COL1, "Hostname:");
+
+	std::string user = mNames.getUserName();
+	std::string host = mNames.getHostName();
+
+	mvprintw(3, COL2, user.c_str());
+	mvprintw(4, COL2, host.c_str());
+
+}
+
+
+void	TerminalDisplay::displayOSinfo( void ) {
+
+	attron(A_REVERSE);
+	std::string title = "OS Info";
+	mvprintw(6, mid(title.size()), title.c_str());
+	attroff(A_REVERSE);
+
+	std::string name = mOSInfo.getProductName();
+	std::string prodVersion = mOSInfo.getProductVersion();
+	std::string kernelVersion = mOSInfo.getKernelVersion();
+
+
+	mvprintw(8, COL1, "Product Name:");
+	mvprintw(9, COL1, "Product Version:");
+	mvprintw(10, COL1, "KernelVersion:");
+
+	mvprintw(8, COL2, name.c_str());
+	mvprintw(9, COL2, prodVersion.c_str());
+	mvprintw(10, COL2, kernelVersion.c_str());
+
 }
 
 void	TerminalDisplay::displayNetwork( void ) {
 
-	return ;
+	attron(A_REVERSE);
+	std::string title = "Network";
+	mvprintw(12, mid(title.size()), title.c_str());
+	attroff(A_REVERSE);
+
+	std::string pcaketsIn = mNetwork.getPacketsIn();
+	std::string pcaketsOut = mNetwork.getPacketsOut();
+
+	mvprintw(14, COL1, "Packets In:");
+	mvprintw(15, COL1, "Packets Out:");
+
+	mvprintw(14, COL2, pcaketsIn.c_str());
+	mvprintw(15, COL2, pcaketsOut.c_str());
+
 }
 
 void	TerminalDisplay::displayCPU( void ) {
 
-	return ;
+	attron(A_REVERSE);
+	std::string title = "CPU";
+	mvprintw(17, mid(title.size()), title.c_str());
+	attroff(A_REVERSE);
+
+	std::string brand = mCPU.getCpuBrand();
+	std::string avg1 = mCPU.getAvg1();
+	std::string avg5 = mCPU.getAvg5();
+	std::string avg15 = mCPU.getAvg15();
+	std::string usageUser = mCPU.getUsageUser();
+	std::string usageSyste = mCPU.getUsageSys();
+	std::string usageIdle = mCPU.getUsageIdle();
+
+	mvprintw(19, COL1, "CPU Brand");
+	mvprintw(20, COL1, "Load Average:");
+	mvprintw(21, COL1, "Usage");
+	mvprintw(22, COL1 + 4, "user:");
+	mvprintw(23, COL1 + 4, "system:");
+	mvprintw(24, COL1 + 4, "idle:");
+
+	mvprintw(19, COL2, brand.c_str());
+	mvprintw(20, COL2, "%s %s %s", avg1.c_str(), avg5.c_str(), avg15.c_str());
+	mvprintw(22, COL2, usageUser.c_str());
+	mvprintw(23, COL2, usageSyste.c_str());
+	mvprintw(24, COL2, usageIdle.c_str());
+
 }
 
 void	TerminalDisplay::displayRAM( void ) {
 
-	return ;
+	attron(A_REVERSE);
+	std::string title = "RAM";
+	mvprintw(26, mid(title.size()), title.c_str());
+	attroff(A_REVERSE);
+
+	std::string physMem = mRAM.getPhysMem();
+	std::string wiredMem = mRAM.getWired();
+	std::string unusedMem = mRAM.getUnused();
+
+	mvprintw(28, COL1, "Phys Mem:");
+	mvprintw(29, COL1, "Wired:");
+	mvprintw(30, COL1, "Unused:");
+
+	mvprintw(28, COL2, physMem.c_str());
+	mvprintw(29, COL2, wiredMem.c_str());
+	mvprintw(30, COL2, unusedMem.c_str());
+
 }
 
-void	TerminalDisplay::displayOSinfo( void ) {
-
-	return ;
-}
 
 
