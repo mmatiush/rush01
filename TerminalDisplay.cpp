@@ -79,6 +79,7 @@ void 		TerminalDisplay::run( void ) {
 	start_color();
 	graph = newwin(3, 22, 35, 10);
 	nodelay(stdscr, true);
+    signal (SIGWINCH, NULL);
     init_pair(TXT_GREEN, COLOR_GREEN, COLOR_BLACK);
     init_pair(TXT_YELLOW, COLOR_YELLOW, COLOR_BLACK);
     init_pair(TXT_RED, COLOR_RED, COLOR_BLACK);
