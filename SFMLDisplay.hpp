@@ -6,6 +6,8 @@
 # include <SFML/Graphics/Font.hpp>
 # include <SFML/Graphics/Texture.hpp>
 # include <SFML/System/String.hpp>
+# include <SFML/System/Time.hpp>
+# include <vector>
 
 class SFMLDisplay : public IMonitorDisplay
 {
@@ -28,6 +30,7 @@ private:
 	RAM				_rAM;
 	Network			_network;
 
+	std::vector<sf::RectangleShape *> _rect;
 
 public:
 
@@ -44,6 +47,7 @@ public:
 	void	displayNetwork( void );
 	void	displayCats( void );
 	void	displayLines( void );
+	void	displayHist( void );
 
 	void	displayTime( std::string &str );
 	void	displayOSinfo( std::string &str );

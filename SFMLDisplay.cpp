@@ -1,6 +1,6 @@
 #include "SFMLDisplay.hpp"
 
-SFMLDisplay::SFMLDisplay()
+SFMLDisplay::SFMLDisplay() : _rect(std::vector<sf::RectangleShape *>(10))
 {
 	window = new sf::RenderWindow;
 	window->create(sf::VideoMode(1800, 1800), "ft_gkrellm");
@@ -35,6 +35,10 @@ SFMLDisplay::SFMLDisplay()
 	sprite1->setPosition(1300,1200);
 	sprite2->setTexture(*texture2);
 	sprite2->setPosition(0,1500);
+
+	std::vector<sf::RectangleShape *>::iterator it = _rect.begin();
+	for(; it != _rect.end(); it++)
+		*it = new sf::RectangleShape(sf::Vector2f(10, 0));
 }
 
 SFMLDisplay::~SFMLDisplay()
@@ -48,6 +52,9 @@ SFMLDisplay::~SFMLDisplay()
 	delete texture2;
 	delete sprite2;
 
+	std::vector<sf::RectangleShape *>::iterator it = _rect.begin();
+	for(; it != _rect.end(); it++)
+		delete *it;
 }
 
 SFMLDisplay::SFMLDisplay(SFMLDisplay const & other)
@@ -415,9 +422,20 @@ void	SFMLDisplay::displayLines(void)
 	window->draw(lines);
 }
 
+void	SFMLDisplay::displayHist( void )
+{
+	std::vector<sf::RectangleShape *>::iterator it = _rect.begin();
+	for(; it != _rect.end(); it++)
+	{
+		if (++it != _rect.end())
+			;
+	}
+}
+
 
 void	SFMLDisplay::display( void ) {
 	std::string StrToParse;
+	sf::Time t1 = sf::seconds(1.0f);
 
 	while (window->isOpen())
 	{
@@ -441,5 +459,6 @@ void	SFMLDisplay::display( void ) {
 		displayNetwork( StrToParse );
 
 		window->display();
+		sf::sleep(t1);
 	}
 }
