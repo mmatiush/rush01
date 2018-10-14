@@ -6,6 +6,7 @@
 #include "RAM.hpp"
 #include "CPU.hpp"
 #include "Network.hpp"
+#include "TerminalDisplay.hpp"
 
 std::string exec(const char* cmd) {
 
@@ -32,9 +33,16 @@ int		main(int ac, char **av) {
 		// CPU c;
 		// Network e;
 		// OSInfo o;
+		
+		TerminalDisplay t1;
 
-		std::string s = exec("top");
-		std::cout << s << std::endl;
+		t1 = TerminalDisplay();
+
+		TerminalDisplay t;
+		t.run();
+
+		// std::string s = exec("top");
+		// std::cout << s << std::endl;
 		// t.parse(s);
 		// std::cout << t.getTime() << std::endl;
 		// std::cout << t.getDate() << std::endl;

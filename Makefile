@@ -3,7 +3,7 @@ NAME = ft_gkrellm
 FLAGS = -Wall -Wextra -Werror
 
 SRC = main.cpp TimeModule.cpp HostUserNames.cpp CPU.cpp Network.cpp \
-		OSInfo.cpp RAM.cpp
+		OSInfo.cpp RAM.cpp TerminalDisplay.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
