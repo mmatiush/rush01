@@ -3,18 +3,38 @@
 SFMLDisplay::SFMLDisplay()
 {
 	window = new sf::RenderWindow;
-	window->create(sf::VideoMode(1800, 2000), "ft_gkrellm");
+	window->create(sf::VideoMode(1800, 1800), "ft_gkrellm");
 	atext = new sf::Text;
 	ttext = new sf::Text;
 	MyFont = new sf::Font;
+	texture1 = new sf::Texture;
+	sprite1 = new sf::Sprite;
+	texture2 = new sf::Texture;
+	sprite2 = new sf::Sprite;
 
-	if (!MyFont->loadFromFile("12394.ttf"))
-		std::cout << "Error in openning file" << std::endl;
+	try
+	{
+		if (!MyFont->loadFromFile("12394.ttf"))
+			throw std::string("Error");
+		if (!texture1->loadFromFile("cat1.png"))
+			throw std::string("Error");
+		if (!texture2->loadFromFile("cat2.png"))
+			throw std::string("Error");
+	}
+	catch (...)
+	{
+		std::cout << "Error in construct!" << std::endl;
+	}
 
 	this->atext->setFont(*MyFont);
 	ttext->setFont(*MyFont);
 	ttext->setCharacterSize(40);
 	ttext->setFillColor(sf::Color::Blue);
+
+	sprite1->setTexture(*texture1);
+	sprite1->setPosition(1300,1200);
+	sprite2->setTexture(*texture2);
+	sprite2->setPosition(0,1500);
 }
 
 SFMLDisplay::~SFMLDisplay()
@@ -23,6 +43,11 @@ SFMLDisplay::~SFMLDisplay()
 	delete atext;
 	delete ttext;
 	delete MyFont;
+	delete texture1;
+	delete sprite1;
+	delete texture2;
+	delete sprite2;
+
 }
 
 SFMLDisplay::SFMLDisplay(SFMLDisplay const & other)
@@ -193,168 +218,60 @@ void	SFMLDisplay::displayCPU( std::string &str ) {
 	window->draw(*ttext);
 
 // CPU brand
-	atext->setPosition(500, 510);
+	atext->setPosition(500, 550);
 	atext->setString("CPU Brand:");
 	window->draw(*atext);
 
 	tmpText.setString(this->_cPU.getCpuBrand());
-	tmpText.setPosition(1000, 510);
+	tmpText.setPosition(1000, 550);
 	window->draw(tmpText);
 
 // loadavg
-	atext->setPosition(500, 550);
+	atext->setPosition(500, 590);
 	atext->setString("Load average:");
 	window->draw(*atext);
 
 	tmpText.setString(this->_cPU.getAvg1());
-	tmpText.setPosition(1000, 550);
+	tmpText.setPosition(1000, 590);
 	window->draw(tmpText);
 	tmpText.setString(this->_cPU.getAvg5());
-	tmpText.setPosition(1100, 550);
+	tmpText.setPosition(1100, 590);
 	window->draw(tmpText);
 	tmpText.setString(this->_cPU.getAvg15());
-	tmpText.setPosition(1200, 550);
+	tmpText.setPosition(1200, 590);
 	window->draw(tmpText);
 
 // usage
-	atext->setPosition(500, 590);
+	atext->setPosition(500, 630);
 	atext->setString("USAGE:");
 	window->draw(*atext);
 
-	atext->setPosition(550, 630);
+	atext->setPosition(550, 670);
 	atext->setString("user:");
 	window->draw(*atext);
 
-	atext->setPosition(550, 670);
+	atext->setPosition(550, 710);
 	atext->setString("system:");
 	window->draw(*atext);
 
-	atext->setPosition(550, 710);
+	atext->setPosition(550, 750);
 	atext->setString("idle:");
 	window->draw(*atext);
 
 // user
 	tmpText.setString(this->_cPU.getUsageUser() + "%");
-	tmpText.setPosition(1000, 630);
+	tmpText.setPosition(1000, 670);
 	window->draw(tmpText);
 
 // sys
 	tmpText.setString(this->_cPU.getUsageSys() + "%");
-	tmpText.setPosition(1000, 670);
+	tmpText.setPosition(1000, 710);
 	window->draw(tmpText);
 
 // idle
 	tmpText.setString(this->_cPU.getUsageIdle() + "%");
-	tmpText.setPosition(1000, 710);
+	tmpText.setPosition(1000, 750);
 	window->draw(tmpText);
-
-}
-
-void	SFMLDisplay::displayRAM( std::string &str ) {
-	this->_rAM.parse(str);
-
-	sf::Text tmpText;
-
-	tmpText.setFont(*MyFont);
-	tmpText.setCharacterSize(25);
-	tmpText.setStyle(sf::Text::Bold);
-	tmpText.setFillColor(sf::Color::White);
-
-// Title
-	ttext->setPosition(830, 790);
-	ttext->setString("RAM");
-	window->draw(*ttext);
-
-// atext
-	atext->setPosition(500, 830);
-	atext->setString("PhysMem:");
-	window->draw(*atext);
-
-	atext->setPosition(500, 870);
-	atext->setString("Wired:");
-	window->draw(*atext);
-
-	atext->setPosition(500, 910);
-	atext->setString("Unused:");
-	window->draw(*atext);
-
-// PhysMem
-	tmpText.setString(this->_rAM.getPhysMem());
-	tmpText.setPosition(1000, 830);
-	window->draw(tmpText);
-
-	tmpText.setString(this->_rAM.getWired());
-	tmpText.setPosition(1000, 870);
-	window->draw(tmpText);
-
-	tmpText.setString(this->_rAM.getUnused());
-	tmpText.setPosition(1000, 910);
-	window->draw(tmpText);
-
-}
-
-void	SFMLDisplay::displayNetwork( std::string &str ) {
-	this->_network.parse(str);
-
-	sf::Text tmpText;
-
-	tmpText.setFont(*MyFont);
-	tmpText.setCharacterSize(25);
-	tmpText.setStyle(sf::Text::Bold);
-	tmpText.setFillColor(sf::Color::White);
-
-// Title
-	ttext->setPosition(800, 990);
-	ttext->setString("Network");
-	window->draw(*ttext);
-
-// atext
-	atext->setPosition(500, 1030);
-	atext->setString("Packets In:");
-	window->draw(*atext);
-
-	atext->setPosition(500, 1070);
-	atext->setString("Packets Out:");
-	window->draw(*atext);
-
-// in
-	tmpText.setString(this->_network.getPacketsIn());
-	tmpText.setPosition(1000, 1030);
-	window->draw(tmpText);
-
-// out
-	tmpText.setString(this->_network.getPacketsOut());
-	tmpText.setPosition(1000, 1070);
-	window->draw(tmpText);
-
-}
-
-
-
-void	SFMLDisplay::display( void ) {
-	std::string StrToParse;
-
-	while (window->isOpen())
-	{
-		StrToParse = ft_exec("top");
-		window->clear();
-
-		sf::Event event;
-		while (window->pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window->close();
-		}
-
-		displayTime( StrToParse );
-		displayOSinfo( StrToParse );
-		displayHostUserName( StrToParse );
-		displayCPU( StrToParse );
-		displayRAM( StrToParse );
-		displayNetwork( StrToParse );
-
-		window->display();
-	}
 
 }
 
@@ -373,4 +290,156 @@ std::string	SFMLDisplay::ft_exec(const char *cmd)
 	pclose(pipe);
 
 	return result;
+}
+
+void	SFMLDisplay::displayRAM( std::string &str ) {
+	this->_rAM.parse(str);
+
+	sf::Text tmpText;
+
+	tmpText.setFont(*MyFont);
+	tmpText.setCharacterSize(25);
+	tmpText.setStyle(sf::Text::Bold);
+	tmpText.setFillColor(sf::Color::White);
+
+// Title
+	ttext->setPosition(830, 830);
+	ttext->setString("RAM");
+	window->draw(*ttext);
+
+// atext
+	atext->setPosition(500, 910);
+	atext->setString("Used:");
+	window->draw(*atext);
+
+	atext->setPosition(500, 950);
+	atext->setString("Wired:");
+	window->draw(*atext);
+
+	atext->setPosition(500, 990);
+	atext->setString("Unused:");
+	window->draw(*atext);
+
+// PhysMem
+	tmpText.setString(this->_rAM.getPhysMem());
+	tmpText.setPosition(1000, 910);
+	window->draw(tmpText);
+
+	tmpText.setString(this->_rAM.getWired());
+	tmpText.setPosition(1000, 950);
+	window->draw(tmpText);
+
+	tmpText.setString(this->_rAM.getUnused());
+	tmpText.setPosition(1000, 990);
+	window->draw(tmpText);
+
+}
+
+void	SFMLDisplay::displayNetwork( std::string &str ) {
+	this->_network.parse(str);
+
+	sf::Text tmpText;
+
+	tmpText.setFont(*MyFont);
+	tmpText.setCharacterSize(25);
+	tmpText.setStyle(sf::Text::Bold);
+	tmpText.setFillColor(sf::Color::White);
+
+// Title
+	ttext->setPosition(800, 1070);
+	ttext->setString("Network");
+	window->draw(*ttext);
+
+// atext
+	atext->setPosition(500, 1150);
+	atext->setString("Packets In:");
+	window->draw(*atext);
+
+	atext->setPosition(500, 1190);
+	atext->setString("Packets Out:");
+	window->draw(*atext);
+
+// in
+	tmpText.setString(this->_network.getPacketsIn());
+	tmpText.setPosition(1000, 1150);
+	window->draw(tmpText);
+
+// out
+	tmpText.setString(this->_network.getPacketsOut());
+	tmpText.setPosition(1000, 1190);
+	window->draw(tmpText);
+
+}
+
+void	SFMLDisplay::displayCats( void )
+{
+	window->draw(*sprite1);
+	window->draw(*sprite2);
+}
+
+void	SFMLDisplay::displayLines(void)
+{
+	sf::VertexArray lines(sf::LinesStrip, 5);
+
+	lines[0].position = sf::Vector2f(10, 45);
+	lines[1].position = sf::Vector2f(1790, 45);
+	lines[2].position = sf::Vector2f(1790, 1250);
+	lines[3].position = sf::Vector2f(10, 1250);
+	lines[4].position = sf::Vector2f(10, 45);
+
+	lines[0].color = sf::Color::Green;
+	lines[1].color = sf::Color::Blue;
+	lines[2].color = sf::Color::Blue;
+	lines[3].color = sf::Color::Green;
+	lines[4].color = sf::Color::Green;
+
+	window->draw(lines);
+
+	lines = sf::VertexArray(sf::LinesStrip, 2);
+	lines[0].position = sf::Vector2f(10, 260);
+	lines[1].position = sf::Vector2f(1790, 260);
+	lines[0].color = sf::Color::Green;
+	lines[1].color = sf::Color::Blue;
+	window->draw(lines);
+
+	lines[0].position = sf::Vector2f(10, 450);
+	lines[1].position = sf::Vector2f(1790, 450);
+	window->draw(lines);
+
+	lines[0].position = sf::Vector2f(10, 810);
+	lines[1].position = sf::Vector2f(1790, 810);
+	window->draw(lines);
+
+	lines[0].position = sf::Vector2f(10, 1050);
+	lines[1].position = sf::Vector2f(1790, 1050);
+	window->draw(lines);
+}
+
+
+void	SFMLDisplay::display( void ) {
+	std::string StrToParse;
+
+	while (window->isOpen())
+	{
+		StrToParse = ft_exec("top");
+		window->clear();
+
+		sf::Event event;
+		while (window->pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window->close();
+		}
+
+		displayLines();
+		displayCats();
+		displayTime( StrToParse );
+		displayOSinfo( StrToParse );
+		displayHostUserName( StrToParse );
+		displayCPU( StrToParse );
+		displayRAM( StrToParse );
+		displayNetwork( StrToParse );
+
+		window->display();
+	}
 }
