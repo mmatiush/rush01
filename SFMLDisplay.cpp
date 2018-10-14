@@ -1,6 +1,6 @@
 #include "SFMLDisplay.hpp"
 
-SFMLDisplay::SFMLDisplay() : _rect(std::vector<sf::RectangleShape *>(10))
+SFMLDisplay::SFMLDisplay() : _rect(std::vector<sf::RectangleShape *>(32))
 {
 	window = new sf::RenderWindow;
 	window->create(sf::VideoMode(1800, 1800), "ft_gkrellm");
@@ -37,11 +37,12 @@ SFMLDisplay::SFMLDisplay() : _rect(std::vector<sf::RectangleShape *>(10))
 	sprite2->setPosition(0,1500);
 
 	std::vector<sf::RectangleShape *>::iterator it = _rect.begin();
-	for(int x = 0; it != _rect.end(); it++, (x += 11))
+	for(int x = 0; it != _rect.end(); it++, (x += 30))
 	{
-		*it = new sf::RectangleShape(sf::Vector2f(10, 1));
-		(*it)->setFillColor(sf::Color::Green);
-		(*it)->setPosition(400 + x, 1500);
+		*it = new sf::RectangleShape(sf::Vector2f(2, 1));
+		(*it)->setFillColor(sf::Color::Cyan);
+		(*it)->setRotation(180);
+		(*it)->setPosition(450 + x, 1780);
 	}
 }
 
@@ -93,11 +94,11 @@ void	SFMLDisplay::displayHist( void )
 	for(; it != _rect.begin(); it--)
 	{
 		(*it)->setScale((*(it - 1))->getScale());
-		window->draw(*it);
+		window->draw(**it);
 	}
-	(*it)->setScale(sf::Vector2f(10, (std::stod(_cPU.getUsageSys()) * 2)));
+	(*it)->setScale(sf::Vector2f(5, (std::stod(_cPU.getUsageUser()) * 8)));
 
-	window->draw(*it);
+	this->window->draw(**it);
 }
 
 // TIME
@@ -138,7 +139,6 @@ void	SFMLDisplay::displayTime( std::string &str ) {
 	window->draw(tmpText);
 
 }
-
 
 
 // OS INFO
@@ -442,7 +442,7 @@ void	SFMLDisplay::displayLines(void)
 
 void	SFMLDisplay::display( void ) {
 	std::string StrToParse;
-	sf::Time t1 = sf::seconds(1.0f);
+	sf::Time t1 = sf::seconds(0.5f);
 
 	while (window->isOpen())
 	{
@@ -457,7 +457,6 @@ void	SFMLDisplay::display( void ) {
 		}
 
 		displayLines();
-		displayCats();
 		displayTime( StrToParse );
 		displayOSinfo( StrToParse );
 		displayHostUserName( StrToParse );
@@ -465,6 +464,7 @@ void	SFMLDisplay::display( void ) {
 		displayRAM( StrToParse );
 		displayNetwork( StrToParse );
 		displayHist();
+		displayCats();
 
 		window->display();
 		sf::sleep(t1);
