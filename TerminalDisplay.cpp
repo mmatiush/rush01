@@ -69,6 +69,7 @@ void		TerminalDisplay::updateMonitors( void ) {
 }
 
 void 		TerminalDisplay::run( void ) {
+	int 	c;
 
 	initscr();
 	cbreak();
@@ -77,6 +78,7 @@ void 		TerminalDisplay::run( void ) {
 	noecho();
 	start_color();
 	graph = newwin(3, 22, 35, 10);
+	nodelay(stdscr, true);
     init_pair(TXT_GREEN, COLOR_GREEN, COLOR_BLACK);
     init_pair(TXT_YELLOW, COLOR_YELLOW, COLOR_BLACK);
     init_pair(TXT_RED, COLOR_RED, COLOR_BLACK);
@@ -98,10 +100,14 @@ void 		TerminalDisplay::run( void ) {
 
 		refresh();
 		wrefresh(graph);
-		usleep (100000);
+		c = wgetch(stdscr);
+		if (c == 'q') {
+			break ;
+		}
+		usleep (10000);
 
 	}
-
+	endwin();
 	endwin();
 }
 
@@ -257,10 +263,10 @@ void	TerminalDisplay::displayRAM( void ) {
 
 void	TerminalDisplay::displayGraphUserCPU( void ) {
 
-	mvprintw(34, 11, "User CPU Usage");
+	mvprintw(34, 11, "System CPU Usage");
 	box(graph, 0, 0);
 
-	std::string usage_str = mCPU.getUsageUser();
+	std::string usage_str = mCPU.getUsageSys();
 	float		usage_f = atof(usage_str.c_str());
 	int			usage = static_cast<int>(usage_f);
 
@@ -285,5 +291,5 @@ void	TerminalDisplay::displayGraphUserCPU( void ) {
 		sym++;
 		i += 5;
 	}
-	
+
 }
