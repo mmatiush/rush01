@@ -48,7 +48,16 @@ TerminalDisplay &		TerminalDisplay::operator=( TerminalDisplay const & rhs ) {
 
 void		TerminalDisplay::updateMonitors( void ) {
 	
-	std::string s = exec("top");
+	char buffer[1000];
+	std::string s = "";
+	FILE* pipe = popen("top", "r");
+	if (!pipe)
+		throw std::runtime_error("popen() failed!");
+
+	for (int i = 0; i < 10; i++)
+		if (fgets(buffer, 1000, pipe) != NULL)
+			s += buffer;
+	pclose(pipe);
 
 	mTime.parse(s);
 	mNames.parse(s);
@@ -111,21 +120,19 @@ void		TerminalDisplay::displayFrame( void ) {
 
 void	TerminalDisplay::displayHeader( void ) {
 	
-
 	std::string str = "System Monitor";
 
 	mvprintw(MIN_Y, (MAX_X - str.size()) / 2, "%s", str.c_str());
 
-	
 }
 
 void	TerminalDisplay::displayTime( void ) {
 	
-	attron(COLOR_PAIR(TXT_YELLOW));
+	std::string t = mTime.getTime();
+	std::string d = mTime.getDate();
 
-
-
-	attroff(COLOR_PAIR(TXT_YELLOW));
+	mvprintw(MIN_Y + 2, MIN_X + 2, d.c_str());
+	mvprintw(MIN_Y + 2, MAX_X + 2 - d.size(), d.c_str());
 
 }
 

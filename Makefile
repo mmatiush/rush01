@@ -10,9 +10,7 @@ OBJ = $(SRC:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	clang++ -lncurses $(OBJ) -o $(NAME) -I ~/.brew/include -L ~/.brew/lib \
-	-lsfml-system -lsfml-window -lsfml-graphics -lsfml-network -lsfml-audio \
-	-rpath ~/.brew/lib -lncurses
+	clang++ -lncurses $(OBJ) -o $(NAME)
 
 %.o: %.cpp
 	clang++ $(FLAGS) -I ~/.brew/include -o $@ -c $<
