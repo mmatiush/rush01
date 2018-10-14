@@ -35,6 +35,7 @@ std::string Network::getPacketsOut() const{
 }
 
 void Network::parse(std::string & strToParce) {
+	
 	size_t	pos = 0;
 	std::string result;
 
