@@ -9,6 +9,7 @@ class CPU : public IMonitorModule
 
 private:
 
+	std::string _cpuBrand;
 	std::string _avg1;
 	std::string _avg5;
 	std::string _avg15;
@@ -18,6 +19,7 @@ private:
 
 public:
 
+	std::string getCpuBrand() const;
 	std::string getAvg1() const;
 	std::string getAvg5() const;
 	std::string getAvg15() const;

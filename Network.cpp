@@ -39,12 +39,12 @@ void Network::parse(std::string & strToParce) {
 	std::string result;
 
 	pos = strToParce.find("packets: ", 0);
-	result = strToParce.substr(pos + 10, (strToParce.find("\n", pos)));
+	result = strToParce.substr(pos + 9, (strToParce.find("\n", pos)));
 
-	pos = result.find("M i", 0);
-	this->_packetsIn = result.substr(0, pos - 1);
+	pos = result.find(" i", 0);
+	this->_packetsIn = result.substr(0, pos);
 
-	result = result.substr(this->_packetsIn.length() + 7);
-	this->_packetsOut = result.substr(0, result.find("M o") - 1);
+	result = result.substr(this->_packetsIn.length() + 5);
+	this->_packetsOut = result.substr(0, result.find(" o"));
 
 }

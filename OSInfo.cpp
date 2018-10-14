@@ -1,9 +1,14 @@
 #include "OSInfo.hpp"
+#include <stdio.h>
 
 OSInfo::OSInfo()
 {
 	char buffer[BUFFERLEN];
 	size_t bufferlen = BUFFERLEN;
+
+	char buffer2[BUFFERLEN];
+	sysctlbyname("kern.version",&buffer2,&bufferlen,NULL,0);
+	this->_kernelVersion = static_cast<std::string>(buffer2);
 
 	this->_productName = "Mac OS X";
 	sysctlbyname("kern.osversion",&buffer,&bufferlen,NULL,0);
@@ -11,9 +16,6 @@ OSInfo::OSInfo()
 
 	sysctlbyname("kern.osrelease",&buffer,&bufferlen,NULL,0);
 	this->_productVersion = static_cast<std::string>(buffer);
-
-	sysctlbyname("kern.version",&buffer,&bufferlen,NULL,0);
-	this->_kernelVersion = buffer;
 
 }
 

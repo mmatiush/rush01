@@ -31,12 +31,14 @@ void RAM::parse(std::string & strToParce)
 
 	pos = result.find(" used", 0);
 	this->_physMem = result.substr(0, pos);
+	result = result.substr(pos + 7);
 
 	pos = result.find(" wired", 0);
-	this->_wired = result.substr((result.find("(", 0) + 1), pos - 2);
+	this->_wired = result.substr(0, pos);
+	result = result.substr(pos + 9);
 
 	pos = result.find(" unused", 0);
-	this->_unused = result.substr((result.find(",", 0) + 1), pos - 1);
+	this->_unused = result.substr(0, pos);
 
 }
 
