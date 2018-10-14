@@ -1,6 +1,5 @@
 ft_gkrellm
-tests/
-./tests/
+tests
 main_read.cpp
 a.out
 *.o
