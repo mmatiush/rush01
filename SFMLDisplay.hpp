@@ -4,6 +4,7 @@
 # include "IMonitorDisplay.hpp"
 # include <SFML/Graphics.hpp>
 # include <SFML/Graphics/Font.hpp>
+# include <SFML/Graphics/Texture.hpp>
 # include <SFML/System/String.hpp>
 
 class SFMLDisplay : public IMonitorDisplay
@@ -15,6 +16,10 @@ private:
 	sf::Text			*atext;
 	sf::Text			*ttext;
 	sf::Font			*MyFont;
+	sf::Texture			*texture1;
+	sf::Texture			*texture2;
+	sf::Sprite			*sprite1;
+	sf::Sprite			*sprite2;
 
 	TimeModule		_timeModule;
 	OSInfo			_oSInfo;
@@ -37,6 +42,8 @@ public:
 	void	displayCPU( void );
 	void	displayRAM( void );
 	void	displayNetwork( void );
+	void	displayCats( void );
+	void	displayLines( void );
 
 	void	displayTime( std::string &str );
 	void	displayOSinfo( std::string &str );
