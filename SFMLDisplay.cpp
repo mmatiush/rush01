@@ -1,23 +1,10 @@
 #include "SFMLDisplay.hpp"
 
-SFMLDisplay::SFMLDisplay() 
+SFMLDisplay::SFMLDisplay() :	window(sf::window.create(sf::VideoMode(1800, 2000), "ft_gkrellm")), \
+								atext(sf::Text atext), \
+								ttext(sf::Text ttext), \
+								MyFont(sf::Font MyFont.loadFromFile("12394.ttf"))
 {
-	TimeModule		_timeModule;
-	OSInfo			_oSInfo;
-	HostUserNames	_hostUserNames;
-	CPU				_cPU;
-	RAM				_rAM;
-	Network			_network;
-
-	window.create(sf::VideoMode(1800, 2000), "ft_gkrellm");
-
-	sf::Text	atext;
-	sf::Text	ttext;
-	sf::Font	MyFont;
-
-	if (!this->MyFont.loadFromFile("12394.ttf"))
-		std::cout << "Error in openning file" << std::endl;
-
 	this->atext.setFont(MyFont);
 	this->ttext.setFont(MyFont);
 	this->ttext.setCharacterSize(40);
@@ -93,7 +80,6 @@ void	SFMLDisplay::displayTime( std::string &str ) {
 }
 
 
-
 // OS INFO
 // void	SFMLDisplay::displayOSinfo( std::string &str ) {
 // 	this->_oSInfo.parse(str);
@@ -158,7 +144,7 @@ void	SFMLDisplay::display( void ) {
 
 	while (window.isOpen())
 	{
-		StrToParse = exec("top");
+		StrToParse = ft_exec("top");
 		window.clear();
 
 		sf::Event event;
@@ -177,5 +163,20 @@ void	SFMLDisplay::display( void ) {
 
 		window.display();
 	}
+}
 
+std::string	SFMLDisplay::ft_exec(const char * cmd)
+{
+	char buffer[1000];
+	std::string result = "";
+	FILE* pipe = popen(cmd, "r");
+	if (!pipe)
+		throw std::runtime_error("popen() failed!");
+
+	for (int i = 0; i < 10; i++)
+		if (fgets(buffer, 1000, pipe) != NULL)
+			result += buffer;
+	pclose(pipe);
+
+	return result;
 }

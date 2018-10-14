@@ -1,7 +1,13 @@
 #ifndef IMONITORDISPLAY_HPP
 # define IMONITORDISPLAY_HPP
 
-#include "main.hpp"
+# include "OSInfo.hpp"
+# include "TimeModule.hpp"
+# include "HostUserNames.hpp"
+# include "RAM.hpp"
+# include "CPU.hpp"
+# include "Network.hpp"
+# include "TerminalDisplay.hpp"
 
 class IMonitorDisplay
 {

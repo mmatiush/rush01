@@ -20,6 +20,11 @@ class SFMLDisplay : public IMonitorDisplay
 
 private:
 
+	sf::RenderWindow	&window;
+	sf::Text			&atext;
+	sf::Text			&ttext;
+	sf::Font			&MyFont;
+
 	TimeModule		_timeModule;
 	OSInfo			_oSInfo;
 	HostUserNames	_hostUserNames;
@@ -27,10 +32,6 @@ private:
 	RAM				_rAM;
 	Network			_network;
 
-	sf::RenderWindow	window;
-	sf::Text			atext;
-	sf::Text			ttext;
-	sf::Font			MyFont;
 
 public:
 
@@ -53,7 +54,8 @@ public:
 	// void	displayRAM( std::string &str );
 	// void	displayNetwork( std::string &str );
 
-	void	display();
+	void		display();
+	std::string	ft_exec();
 
 };
 

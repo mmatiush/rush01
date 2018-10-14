@@ -9,7 +9,6 @@
 # include "RAM.hpp"
 # include "CPU.hpp"
 # include "Network.hpp"
-
-std::string exec(const char* cmd);
+# include "TerminalDisplay.hpp"
 
 #endif
