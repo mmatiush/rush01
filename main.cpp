@@ -1,3 +1,4 @@
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include "MLXDisplay.hpp"
 #include "OSInfo.hpp"
@@ -33,8 +34,8 @@ int		main(int ac, char **av) {
 		// Network e;
 		// OSInfo o;
 
-		std::string s = exec("top");
-		std::cout << s << std::endl;
+		// std::string s = exec("top");
+		// std::cout << s << std::endl;
 		// t.parse(s);
 		// std::cout << t.getTime() << std::endl;
 		// std::cout << t.getDate() << std::endl;
