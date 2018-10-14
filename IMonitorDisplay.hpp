@@ -1,6 +1,14 @@
 #ifndef IMONITORDISPLAY_HPP
 # define IMONITORDISPLAY_HPP
 
+# include "OSInfo.hpp"
+# include "TimeModule.hpp"
+# include "HostUserNames.hpp"
+# include "RAM.hpp"
+# include "CPU.hpp"
+# include "Network.hpp"
+# include "TerminalDisplay.hpp"
+
 class IMonitorDisplay
 {
 
@@ -14,6 +22,7 @@ public:
 	virtual void	displayRAM( void ) = 0;
 	virtual void	displayOSinfo( void ) = 0;
 	virtual void	displayTime( void ) = 0;
+
 
 };
 

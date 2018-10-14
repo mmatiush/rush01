@@ -9,10 +9,9 @@ OSInfo::OSInfo()
 	char buffer2[BUFFERLEN];
 	sysctlbyname("kern.version",&buffer2,&bufferlen,NULL,0);
 	this->_kernelVersion = static_cast<std::string>(buffer2);
+	this->_kernelVersion = this->_kernelVersion.substr(this->_kernelVersion.find("PST", 0));
 
 	this->_productName = "Mac OS X";
-	sysctlbyname("kern.osversion",&buffer,&bufferlen,NULL,0);
-	this->_buildVersion = static_cast<std::string>(buffer);
 
 	sysctlbyname("kern.osrelease",&buffer,&bufferlen,NULL,0);
 	this->_productVersion = static_cast<std::string>(buffer);
@@ -30,7 +29,6 @@ OSInfo & OSInfo::operator=(OSInfo const & other)
 {
 	if (this != &other)
 	{
-		this->_buildVersion = other._buildVersion;
 		this->_productName = other._productName;
 		this->_productVersion = other._productVersion;
 		this->_kernelVersion = other._kernelVersion;
@@ -44,11 +42,6 @@ std::string OSInfo::getProductName() const
 	return this->_productName;
 }
 
-std::string OSInfo::getBuildVersion() const
-{
-	return this->_buildVersion;
-}
-
 std::string OSInfo::getProductVersion() const
 {
 	return this->_productVersion;
@@ -57,4 +50,10 @@ std::string OSInfo::getProductVersion() const
 std::string OSInfo::getKernelVersion() const
 {
 	return this->_kernelVersion;
+}
+
+void		OSInfo::parse(std::string & strToParce)
+{
+	if (strToParce.length())
+		return;
 }
