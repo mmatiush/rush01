@@ -25,6 +25,13 @@ int		main(int ac, char **av) {
 		// CPU c;
 		// Network e;
 		// OSInfo o;
+		
+		TerminalDisplay t1;
+
+		t1 = TerminalDisplay();
+
+		TerminalDisplay t;
+		t.run();
 
 		// std::string s = exec("top");
 		// std::cout << s << std::endl;
