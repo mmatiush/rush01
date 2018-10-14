@@ -9,7 +9,7 @@
 # define MIN_X	0
 # define MIN_Y	0
 # define MAX_X	91
-# define MAX_Y	30
+# define MAX_Y	40
 # define mid(x) ((MAX_X - x) / 2)
 
 # define COL1	10

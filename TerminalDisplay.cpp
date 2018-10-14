@@ -90,6 +90,8 @@ void 		TerminalDisplay::run( void ) {
 		displayHostUserName();
 		displayOSinfo();
 		displayNetwork();
+		displayCPU();
+		displayRAM();
 
 		refresh();
 		usleep (10000);
@@ -189,24 +191,63 @@ void	TerminalDisplay::displayNetwork( void ) {
 	std::string pcaketsIn = mNetwork.getPacketsIn();
 	std::string pcaketsOut = mNetwork.getPacketsOut();
 
-	mvprintw(8, COL1, "pa:");
-	mvprintw(9, COL1, "Product Version:");
-	mvprintw(10, COL1, "KernelVersion:");
+	mvprintw(14, COL1, "Packets In:");
+	mvprintw(15, COL1, "Packets Out:");
 
-	// mvprintw(8, COL2, name.c_str());
-	// mvprintw(9, COL2, prodVersion.c_str());
-	// mvprintw(10, COL2, kernelVersion.c_str());
+	mvprintw(14, COL2, pcaketsIn.c_str());
+	mvprintw(15, COL2, pcaketsOut.c_str());
 
 }
 
 void	TerminalDisplay::displayCPU( void ) {
 
-	return ;
+	attron(A_REVERSE);
+	std::string title = "CPU";
+	mvprintw(17, mid(title.size()), title.c_str());
+	attroff(A_REVERSE);
+
+	std::string brand = mCPU.getCpuBrand();
+	std::string avg1 = mCPU.getAvg1();
+	std::string avg5 = mCPU.getAvg5();
+	std::string avg15 = mCPU.getAvg15();
+	std::string usageUser = mCPU.getUsageUser();
+	std::string usageSyste = mCPU.getUsageSys();
+	std::string usageIdle = mCPU.getUsageIdle();
+
+	mvprintw(19, COL1, "CPU Brand");
+	mvprintw(20, COL1, "Load Average:");
+	mvprintw(21, COL1, "Usage");
+	mvprintw(22, COL1 + 4, "user:");
+	mvprintw(23, COL1 + 4, "system:");
+	mvprintw(24, COL1 + 4, "idle:");
+
+	mvprintw(19, COL2, brand.c_str());
+	mvprintw(20, COL2, "%s %s %s", avg1.c_str(), avg5.c_str(), avg15.c_str());
+	mvprintw(22, COL2, usageUser.c_str());
+	mvprintw(23, COL2, usageSyste.c_str());
+	mvprintw(24, COL2, usageIdle.c_str());
+
 }
 
 void	TerminalDisplay::displayRAM( void ) {
 
-	return ;
+	attron(A_REVERSE);
+	std::string title = "RAM";
+	mvprintw(26, mid(title.size()), title.c_str());
+	attroff(A_REVERSE);
+
+	std::string physMem = mRAM.getPhysMem();
+	std::string wiredMem = mRAM.getWired();
+	std::string unusedMem = mRAM.getUnused();
+
+	mvprintw(28, COL1, "Phys Mem:");
+	mvprintw(29, COL1, "Wired:");
+	mvprintw(30, COL1, "Unused:");
+
+	mvprintw(28, COL2, physMem.c_str());
+	mvprintw(29, COL2, wiredMem.c_str());
+	mvprintw(30, COL2, unusedMem.c_str());
+
 }
 
 
