@@ -92,10 +92,11 @@ void	SFMLDisplay::displayHist( void )
 	std::vector<sf::RectangleShape *>::iterator it = --(_rect.end());
 	for(; it != _rect.begin(); it--)
 	{
-		*it->setScale((*(it - 1))->getScale());
+		(*it)->setScale((*(it - 1))->getScale());
 		window->draw(*it);
 	}
-	*it.setScale(sf::Vector2f(10, (std::stod(_cPU.getUsageSys()) * 2)));
+	(*it)->setScale(sf::Vector2f(10, (std::stod(_cPU.getUsageSys()) * 2)));
+
 	window->draw(*it);
 }
 

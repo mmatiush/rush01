@@ -7,6 +7,8 @@
 # include <SFML/Graphics/Texture.hpp>
 # include <SFML/System/String.hpp>
 # include <SFML/System/Time.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
+# include <SFML/Graphics/RenderTarget.hpp>
 # include <vector>
 
 class SFMLDisplay : public IMonitorDisplay
