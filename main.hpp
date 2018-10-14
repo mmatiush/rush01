@@ -2,7 +2,7 @@
 # define MAIN_HPP
 
 # include <iostream>
-// # include "SFMLDisplay.hpp"
+# include "SFMLDisplay.hpp"
 # include "OSInfo.hpp"
 # include "TimeModule.hpp"
 # include "HostUserNames.hpp"

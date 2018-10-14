@@ -2,14 +2,6 @@
 # define TERMINALDISPLAY_HPP
 # include <iostream>
 # include "IMonitorDisplay.hpp"
-# include "IMonitorModule.hpp"
-# include "OSInfo.hpp"
-# include "TimeModule.hpp"
-# include "HostUserNames.hpp"
-# include "RAM.hpp"
-# include "CPU.hpp"
-# include "Network.hpp"
-# include "TerminalDisplay.hpp"
 
 # include <ncurses.h>
 # include <unistd.h> 
@@ -26,7 +18,7 @@
 # define TXT_GREEN 1
 # define TXT_YELLOW 2
 
-class TerminalDisplay : IMonitorDisplay {
+class TerminalDisplay : public IMonitorDisplay {
 
 public:
 
