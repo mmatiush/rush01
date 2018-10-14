@@ -16,8 +16,9 @@
 # define COL2	45
 
 
-# define TXT_GREEN 1
-# define TXT_YELLOW 2
+# define TXT_GREEN	1
+# define TXT_YELLOW	2
+# define TXT_RED	3
 
 class TerminalDisplay : public IMonitorDisplay {
 
@@ -42,6 +43,8 @@ public:
 	void		displayCPU( void );
 	void		displayRAM( void );
 	void		displayOSinfo( void );
+	void		displayGraphUserCPU( void );
+
 
 private:
 
@@ -51,6 +54,7 @@ private:
 	Network 			mNetwork;
 	CPU 				mCPU;
 	RAM 				mRAM;
+	WINDOW				*graph;
 
 };
 

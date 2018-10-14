@@ -76,14 +76,16 @@ void 		TerminalDisplay::run( void ) {
 	keypad(stdscr, TRUE);
 	noecho();
 	start_color();
+	graph = newwin(3, 22, 35, 10);
     init_pair(TXT_GREEN, COLOR_GREEN, COLOR_BLACK);
     init_pair(TXT_YELLOW, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(TXT_RED, COLOR_RED, COLOR_BLACK);
 	
 	while (-42) {
 	
 		erase();
+		wclear(graph);
 		updateMonitors();
-
 		displayFrame();
 		displayHeader();
 		displayTime();
@@ -92,14 +94,15 @@ void 		TerminalDisplay::run( void ) {
 		displayNetwork();
 		displayCPU();
 		displayRAM();
+		displayGraphUserCPU();
 
 		refresh();
-		usleep (10000);
+		wrefresh(graph);
+		usleep (100000);
 
 	}
 
 	endwin();
-
 }
 
 void		TerminalDisplay::displayFrame( void ) {
@@ -227,6 +230,8 @@ void	TerminalDisplay::displayCPU( void ) {
 	mvprintw(23, COL2, usageSyste.c_str());
 	mvprintw(24, COL2, usageIdle.c_str());
 
+
+
 }
 
 void	TerminalDisplay::displayRAM( void ) {
@@ -250,5 +255,35 @@ void	TerminalDisplay::displayRAM( void ) {
 
 }
 
+void	TerminalDisplay::displayGraphUserCPU( void ) {
 
+	mvprintw(34, 11, "User CPU Usage");
+	box(graph, 0, 0);
 
+	std::string usage_str = mCPU.getUsageUser();
+	float		usage_f = atof(usage_str.c_str());
+	int			usage = static_cast<int>(usage_f);
+
+	int i = 0;
+	int sym = 1;
+	while (i < usage) {
+		if (i <= 30) {
+			wattron(graph, COLOR_PAIR(TXT_GREEN));
+			mvwprintw(graph, 1, sym, "|");
+			wattroff(graph, COLOR_PAIR(TXT_GREEN));
+		}
+		else if (i <= 60) {
+			wattron(graph, COLOR_PAIR(TXT_YELLOW));
+			mvwprintw(graph, 1, sym, "|");
+			wattroff(graph, COLOR_PAIR(TXT_YELLOW));
+		}
+		else {
+			wattron(graph, COLOR_PAIR(TXT_RED));
+			mvwprintw(graph, 1, sym, "|");
+			wattroff(graph, COLOR_PAIR(TXT_RED));
+		}
+		sym++;
+		i += 5;
+	}
+	
+}
